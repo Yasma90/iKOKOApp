@@ -9,6 +9,8 @@ namespace iKOKO.Persistence.UnitOfWork
         ISaleRepository SaleRepository { get; set; }
         IIceCreamRepository IceCreamRepository { get; set; }
         IClientRepository ClientRepository { get; set; }
+        IProductRepository ProductRepository { get; set; }
+        IWarehouseRepository WarehouseRepository { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

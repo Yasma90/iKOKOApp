@@ -11,19 +11,26 @@ namespace iKOKO.Persistence.UnitOfWork
     {
         private bool disposed;
         private readonly iKOKODbContext _context;
+
         public ISaleRepository SaleRepository { get; set; }
         public IIceCreamRepository IceCreamRepository { get; set; }
         public IClientRepository ClientRepository { get; set; }
+        public IProductRepository ProductRepository { get; set; }
+        public IWarehouseRepository WarehouseRepository { get; set; }
 
         public UnitOfWork(iKOKODbContext context,
             ISaleRepository saleRepository,
             IIceCreamRepository iceCreamRepository,
-            IClientRepository clientRepository)
+            IClientRepository clientRepository,
+            IProductRepository productRepository,
+            IWarehouseRepository warehouseRepository)
         {
             _context = context;
             SaleRepository = saleRepository;
             IceCreamRepository = iceCreamRepository;
             ClientRepository = clientRepository;
+            ProductRepository = productRepository;
+            WarehouseRepository = warehouseRepository;
         }
 
         public async Task<int> SaveChangesAsync()
