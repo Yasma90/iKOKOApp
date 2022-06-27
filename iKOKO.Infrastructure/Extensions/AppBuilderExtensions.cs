@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace iKOKO.Infrastructure
+namespace iKOKO.Infrastructure.Extensions
 {
     public class AppBuilderExtensions
     {
