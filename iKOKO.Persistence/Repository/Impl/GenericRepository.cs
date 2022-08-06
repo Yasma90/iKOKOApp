@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace iKOKO.Persistence.Repository
 {
@@ -12,7 +12,7 @@ namespace iKOKO.Persistence.Repository
         where TEntity : class
     {
 
-        private readonly iKOKODbContext _context; 
+        private readonly iKOKODbContext _context;
         private readonly DbSet<TEntity> _dbSet;
         private bool disposed;
 
@@ -22,37 +22,31 @@ namespace iKOKO.Persistence.Repository
             _dbSet = _context.Set<TEntity>();
         }
 
-        public async Task<List<TEntity>> GetAllAsync()=>  await _dbSet.ToListAsync();
-        
+        public Task<IList<TEntity>> Get(Expression<Func<TEntity, bool>> expression = null, IList<string> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<TEntity>> GetAll(Expression<Func<TEntity, bool>> expression = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, IList<string> includes = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
+
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
             return entity;
         }
+        
+        public async Task<TEntity> GetAsync(Guid id) => await _dbSet.FindAsync(id);
 
         public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
             return entities;
         }
-
-        public async Task<TEntity> DeleteAsync(Guid id)
-        {
-            var entity = await _dbSet.FindAsync(id);
-            if (entity == null)
-                return entity;
-
-            _dbSet.Remove(entity);
-            return entity;
-        }
-
-        public IEnumerable<TEntity> DeleteRange(IEnumerable<TEntity> entities)
-        {
-            _dbSet.RemoveRange(entities);
-            return entities;
-        }
-
-        public async Task<TEntity> GetAsync(Guid id) => await _dbSet.FindAsync(id);
         
         public TEntity Update(TEntity entity)
         {
@@ -63,6 +57,20 @@ namespace iKOKO.Persistence.Repository
         public IEnumerable<TEntity> UpdateRange(IEnumerable<TEntity> entities)
         {
             _dbSet.UpdateRange(entities);
+            return entities;
+        }
+
+        public async Task<TEntity> DeleteAsync(Guid id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+            if (entity != null)
+                _dbSet.Remove(entity);
+            return entity;
+        }
+
+        public IEnumerable<TEntity> DeleteRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.RemoveRange(entities);
             return entities;
         }
 
@@ -97,6 +105,7 @@ namespace iKOKO.Persistence.Repository
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+     
         #endregion
 
     }

@@ -25,10 +25,7 @@ namespace iKOKO.API.Controllers
 
         // GET: api/Clients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Client>>> GetClients()
-        {
-            return await _unitOfWork.ClientRepository.GetAllAsync();
-        }
+        public async Task<ActionResult<IEnumerable<Client>>> GetClients() => await _unitOfWork.ClientRepository.GetAllAsync();
 
         // GET: api/Clients/5
         [HttpGet("{id}")]

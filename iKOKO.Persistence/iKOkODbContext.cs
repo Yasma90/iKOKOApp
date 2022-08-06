@@ -12,16 +12,13 @@ namespace iKOKO.Persistence
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
 
-        public iKOKODbContext(DbContextOptions<iKOKODbContext> options) : base(options)
-        {
-        }
+        public iKOKODbContext(DbContextOptions<iKOKODbContext> options) : base(options) { }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=iKOKODb;Trusted_Connection=true;MultipleActiveResultSets=true;")
         //    .EnableSensitiveDataLogging(true);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
     }
 }

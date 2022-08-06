@@ -64,11 +64,8 @@ namespace iKOKO.API.Controllers
                     _logger.LogError($"Update function error: Warehouse don't exist.");
                     return NotFound();
                 }
-                else
-                {
-                    _logger.LogError($"Update function error: {ex.Message}");
-                    throw;
-                }
+                _logger.LogError($"Update function error: {ex.Message}");
+                throw;
             }
 
             return NoContent();

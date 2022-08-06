@@ -9,8 +9,6 @@ namespace iKOKO.Persistence.Repository
 {
      public class ClientRepository : GenericRepository<Client>, IClientRepository
     {
-        public ClientRepository(iKOKODbContext context) : base(context)
-        {
-        }
+        public ClientRepository(iKOKODbContext context) : base(context) { }
     }
 }
